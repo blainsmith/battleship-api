@@ -36,15 +36,42 @@ func NewGame() *Game {
 	return game
 }
 
-func (g *Game) ReceiveShot(c *Coord) bool {
+func (g *Game) ReceiveShot(c *Coord) int {
+	result := 1
 	position := c.Position()
 	character := fmt.Sprintf("%c", g.Grid[position])
 
-	if character != "0" {
-		return true
+	switch character {
+	case "0":
+		result = 0
+	case "1":
+		g.carrier -= 1
+		if g.carrier <= 0 {
+			result = 2
+		}
+	case "2":
+		g.battleship -= 1
+		if g.battleship <= 0 {
+			result = 2
+		}
+	case "3":
+		g.cruiser -= 1
+		if g.cruiser <= 0 {
+			result = 2
+		}
+	case "4":
+		g.submarine -= 1
+		if g.submarine <= 0 {
+			result = 2
+		}
+	case "5":
+		g.destroyer -= 1
+		if g.destroyer <= 0 {
+			result = 2
+		}
 	}
 
-	return false
+	return result
 }
 
 func uuid() (string, error) {
