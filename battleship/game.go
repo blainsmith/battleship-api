@@ -6,6 +6,9 @@ import (
 	"io"
 )
 
+// Fake KV database of all games in progress
+var Games = make(map[string]Game)
+
 type Game struct {
 	GameID string `json:"gameId"`
 	Grid   string `json:"grid"`
@@ -13,11 +16,14 @@ type Game struct {
 
 func NewGame() *Game {
 	uuid, _ := uuid()
-
-	return &Game{
+	game := &Game{
 		GameID: uuid,
-		Grid:   "0300222200030000000003100000000010005000001000500000100444000010000000000000000000000000000000000000",
+		Grid:   generateGrid(),
 	}
+
+	Games[game.GameID] = game
+
+	return game
 }
 
 func (g *Game) ReceiveShot(c *Coord) bool {
@@ -45,4 +51,8 @@ func uuid() (string, error) {
 	uuid[6] = uuid[6]&^0xf0 | 0x40
 
 	return fmt.Sprintf("%x-%x-%x-%x-%x", uuid[0:4], uuid[4:6], uuid[6:8], uuid[8:10], uuid[10:]), nil
+}
+
+func generateGrid() string {
+	return "0300222200030000000003100000000010005000001000500000100444000010000000000000000000000000000000000000"
 }

@@ -5,10 +5,6 @@ import (
 	"github.com/blainsmith/battleship/handlers"
 )
 
-func init() {
-	// Connect to DB
-}
-
 func main() {
 	router := helm.New(handlers.RootHandler)
 	router.Handle("POST", "/battleship/game", handlers.CreateGameHandler)
