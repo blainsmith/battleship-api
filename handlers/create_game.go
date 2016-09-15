@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"github.com/acmacalister/helm"
 	"github.com/blainsmith/battleship/battleship"
 	"net/http"
