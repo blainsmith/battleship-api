@@ -7,7 +7,7 @@ import (
 )
 
 // Fake KV database of all games in progress
-var Games = make(map[string]Game)
+var Games = make(map[string]*Game)
 
 type Game struct {
 	GameID string `json:"gameId"`
