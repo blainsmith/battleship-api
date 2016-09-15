@@ -10,15 +10,25 @@ import (
 var Games = make(map[string]*Game)
 
 type Game struct {
-	GameID string `json:"gameId"`
-	Grid   string `json:"grid"`
+	GameID     string `json:"gameId"`
+	Grid       string `json:"grid"`
+	carrier    int
+	battleship int
+	cruiser    int
+	submarine  int
+	destroyer  int
 }
 
 func NewGame() *Game {
 	uuid, _ := uuid()
 	game := &Game{
-		GameID: uuid,
-		Grid:   generateGrid(),
+		GameID:     uuid,
+		Grid:       generateGrid(),
+		carrier:    5,
+		battleship: 4,
+		cruiser:    3,
+		submarine:  3,
+		destroyer:  2,
 	}
 
 	Games[game.GameID] = game
