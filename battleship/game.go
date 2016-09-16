@@ -31,8 +31,6 @@ func NewGame() *Game {
 		destroyer:  2,
 	}
 
-	Games[game.GameID] = game
-
 	return game
 }
 
