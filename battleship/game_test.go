@@ -1,7 +1,7 @@
 package battleship_test
 
 import (
-	"github.com/blainsmith/battleship/battleship"
+	"github.com/blainsmith/battleship-api/battleship"
 	"testing"
 )
 
