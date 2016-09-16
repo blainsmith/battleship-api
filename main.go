@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/acmacalister/helm"
-	"github.com/blainsmith/battleship/handlers"
+	"github.com/blainsmith/battleship-api/handlers"
 )
 
 func main() {
