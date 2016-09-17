@@ -16,3 +16,14 @@ func TestPosition(t *testing.T) {
 		t.Error("wrong position")
 	}
 }
+
+func TestRandomCoord(t *testing.T) {
+	randomCoord := battleship.RandomCoord()
+
+	if randomCoord.Letter == "" {
+		t.Error("wrong random letter")
+	}
+	if randomCoord.Number == "" {
+		t.Error("wrong random number")
+	}
+}
