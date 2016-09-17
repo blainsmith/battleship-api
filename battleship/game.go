@@ -19,6 +19,10 @@ type Game struct {
 	destroyer  int
 }
 
+type ShotResult struct {
+	Result int `json:"result"`
+}
+
 func NewGame() *Game {
 	uuid, _ := uuid()
 	game := &Game{
@@ -34,7 +38,7 @@ func NewGame() *Game {
 	return game
 }
 
-func (g *Game) ReceiveShot(c *Coord) int {
+func (g *Game) ReceiveShot(c *Coord) *ShotResult {
 	result := 1
 	position := c.Position()
 	character := fmt.Sprintf("%c", g.Grid[position])
@@ -69,7 +73,9 @@ func (g *Game) ReceiveShot(c *Coord) int {
 		}
 	}
 
-	return result
+	return &ShotResult{
+		Result: result,
+	}
 }
 
 func uuid() (string, error) {
