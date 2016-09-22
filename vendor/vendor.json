@@ -1,0 +1,13 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "0ZAJI9nxYa16DymOmN1JHEaVNXM=",
+			"path": "github.com/acmacalister/helm",
+			"revision": "1439690fb1d45ed676fdde36d4a47fcda1268241",
+			"revisionTime": "2016-03-11T03:46:23Z"
+		}
+	],
+	"rootPath": "github.com/blainsmith/battleship-api"
+}
