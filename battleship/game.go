@@ -19,7 +19,6 @@ type Ship struct {
 type Game struct {
 	GameID string `json:"gameId"`
 	Grid   string `json:"grid"`
-	grid   [][]string
 	fleet  []Ship
 }
 
