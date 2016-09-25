@@ -35,6 +35,8 @@ func NewGame() *Game {
 		destroyer:  2,
 	}
 
+	game.generateGrid()
+
 	return game
 }
 
@@ -94,6 +96,6 @@ func uuid() (string, error) {
 	return fmt.Sprintf("%x-%x-%x-%x-%x", uuid[0:4], uuid[4:6], uuid[6:8], uuid[8:10], uuid[10:]), nil
 }
 
-func generateGrid() string {
-	return "0300222200030000000003100000000010005000001000500000100444000010000000000000000000000000000000000000"
+func (g *Game) generateGrid() {
+	g.Grid = "0300222200030000000003100000000010005000001000500000100444000010000000000000000000000000000000000000"
 }
