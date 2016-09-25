@@ -4,19 +4,23 @@ import (
 	"crypto/rand"
 	"fmt"
 	"io"
+	"strconv"
 )
 
 // Fake KV database of all games in progress
 var Games = make(map[string]*Game)
 
+type Ship struct {
+	ID   string
+	Name string
+	Size int
+}
+
 type Game struct {
-	GameID     string `json:"gameId"`
-	Grid       string `json:"grid"`
-	carrier    int
-	battleship int
-	cruiser    int
-	submarine  int
-	destroyer  int
+	GameID string `json:"gameId"`
+	Grid   string `json:"grid"`
+	grid   [][]string
+	fleet  []Ship
 }
 
 type ShotResult struct {
@@ -26,13 +30,14 @@ type ShotResult struct {
 func NewGame() *Game {
 	uuid, _ := uuid()
 	game := &Game{
-		GameID:     uuid,
-		Grid:       generateGrid(),
-		carrier:    5,
-		battleship: 4,
-		cruiser:    3,
-		submarine:  3,
-		destroyer:  2,
+		GameID: uuid,
+		fleet: []Ship{
+			{ID: "1", Name: "Carrier", Size: 5},
+			{ID: "2", Name: "Battleship", Size: 4},
+			{ID: "3", Name: "Cruiser", Size: 3},
+			{ID: "4", Name: "Submarine", Size: 3},
+			{ID: "5", Name: "Destroyer", Size: 2},
+		},
 	}
 
 	game.generateGrid()
@@ -44,33 +49,14 @@ func (g *Game) ReceiveShot(c *Coord) *ShotResult {
 	result := 1
 	position := c.Position()
 	character := fmt.Sprintf("%c", g.Grid[position])
+	index, _ := strconv.Atoi(string(character))
+	index -= 1
 
-	switch character {
-	case "0":
+	if index == -1 {
 		result = 0
-	case "1":
-		g.carrier -= 1
-		if g.carrier <= 0 {
-			result = 2
-		}
-	case "2":
-		g.battleship -= 1
-		if g.battleship <= 0 {
-			result = 2
-		}
-	case "3":
-		g.cruiser -= 1
-		if g.cruiser <= 0 {
-			result = 2
-		}
-	case "4":
-		g.submarine -= 1
-		if g.submarine <= 0 {
-			result = 2
-		}
-	case "5":
-		g.destroyer -= 1
-		if g.destroyer <= 0 {
+	} else {
+		g.fleet[index].Size -= 1
+		if g.fleet[index].Size <= 0 {
 			result = 2
 		}
 	}
