@@ -86,7 +86,7 @@ func (g *Game) generateGrid() {
 			// Get a random coord and direction
 			x = lib.Random(0, 9)
 			y = lib.Random(0, 9)
-			d = lib.Random(0, 1) // This is not random enough, always 0
+			d = lib.Random(0, 99) % 2
 
 			// Does the ship start at an empty slot and fit within the bounds of the grid?
 			if grid[x][y] == 0 && ((d == 0 && (x+ship.Size) <= 9) || (d == 1 && (y+ship.Size) <= 9)) {
