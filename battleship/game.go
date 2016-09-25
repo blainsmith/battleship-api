@@ -114,9 +114,13 @@ func (g *Game) generateGrid() {
 			}
 		}
 	}
+
+	var stringGrid []byte
 	for r := 0; r <= 9; r++ {
-		fmt.Println(grid[r])
+		for c := 0; c <= 9; c++ {
+			stringGrid = append(stringGrid, strconv.Itoa(grid[r][c])...)
+		}
 	}
 
-	g.Grid = "0300222200030000000003100000000010005000001000500000100444000010000000000000000000000000000000000000"
+	g.Grid = string(stringGrid)
 }
