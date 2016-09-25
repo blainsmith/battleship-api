@@ -2,11 +2,11 @@ package battleship
 
 import (
 	"fmt"
-	"math/rand"
 	"strconv"
 	"strings"
-	"time"
 	"unicode/utf8"
+
+	"github.com/blainsmith/battleship-api/lib"
 )
 
 type Coord struct {
@@ -15,8 +15,8 @@ type Coord struct {
 }
 
 func RandomCoord() *Coord {
-	letter := fmt.Sprintf("%c", random()+65)
-	number := random()
+	letter := fmt.Sprintf("%c", lib.Random(1, 10)+65)
+	number := lib.Random(1, 10)
 
 	return &Coord{
 		Letter: letter,
@@ -36,9 +36,4 @@ func (c *Coord) Position() int {
 	position, _ := strconv.Atoi(strconv.Itoa(int(letter)) + strconv.Itoa((number - 1)))
 
 	return position
-}
-
-func random() int {
-	rand.Seed(time.Now().Unix())
-	return rand.Intn(9) + 1
 }
