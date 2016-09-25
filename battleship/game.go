@@ -23,7 +23,8 @@ type Game struct {
 }
 
 type ShotResult struct {
-	Result int `json:"result"`
+	Result  int    `json:"result"`
+	Message string `json:"message"`
 }
 
 func NewGame() *Game {
@@ -45,6 +46,7 @@ func NewGame() *Game {
 }
 
 func (g *Game) ReceiveShot(c *Coord) *ShotResult {
+	var message string
 	result := 1
 	position := c.Position()
 	character := fmt.Sprintf("%c", g.Grid[position])
@@ -53,15 +55,19 @@ func (g *Game) ReceiveShot(c *Coord) *ShotResult {
 
 	if index == -1 {
 		result = 0
+		message = "Sorry, you missed"
 	} else {
 		g.fleet[index].Size -= 1
+		message = "You hit my " + g.fleet[index].Name
 		if g.fleet[index].Size <= 0 {
 			result = 2
+			message = "You sunk my " + g.fleet[index].Name
 		}
 	}
 
 	return &ShotResult{
-		Result: result,
+		Result:  result,
+		Message: message,
 	}
 }
 
