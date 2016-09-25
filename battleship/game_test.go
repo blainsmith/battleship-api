@@ -7,6 +7,7 @@ import (
 
 func TestReceiveShot(t *testing.T) {
 	game := battleship.NewGame()
+	game.Grid = "0300222200030000000003100000000010005000001000500000100444000010000000000000000000000000000000000000"
 
 	if game.ReceiveShot(&battleship.Coord{Letter: "A", Number: "2"}).Result != 1 {
 		t.Error("expected a hit")
